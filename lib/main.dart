@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_shopy/constants/theme.dart';
 import 'package:smart_shopy/screens/auth_ui/welcome/welcome_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
+  _initFirebase();
   runApp(const MyApp());
 }
 
@@ -19,4 +22,10 @@ class MyApp extends StatelessWidget {
       home: const WelcomeScreen(),
     );
   }
+}
+
+_initFirebase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
