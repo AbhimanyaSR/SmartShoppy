@@ -10,7 +10,6 @@ class TopTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-
         //* Back button
         if (title == login || title == signup)
           const Align(

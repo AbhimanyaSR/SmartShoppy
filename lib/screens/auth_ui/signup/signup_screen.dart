@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_shopy/constants/constants.dart';
 import 'package:smart_shopy/constants/consts.dart';
 import 'package:smart_shopy/constants/routes.dart';
+import 'package:smart_shopy/firebase/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:smart_shopy/screens/home/home_screen.dart';
 import 'package:smart_shopy/widgets/primary_button/primary_button.dart';
 import 'package:smart_shopy/widgets/top_title/top_title.dart';
@@ -14,6 +16,10 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool isShowPassword = false;
+  TextEditingController nameIn = TextEditingController();
+  TextEditingController emailIn = TextEditingController();
+  TextEditingController phoneIn = TextEditingController();
+  TextEditingController passwordIn = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +55,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 5.heightBox,
                 TextFormField(
+                  controller: nameIn,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.person_outline_outlined,
                     ),
-                    hintText: emailHint,
+                    hintText: 'Admin',
                   ),
                 ),
                 //* Email input field
@@ -71,6 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 5.heightBox,
                 TextFormField(
+                  controller: emailIn,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(
@@ -95,6 +103,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 5.heightBox,
                 TextFormField(
+                  controller: phoneIn,
                   keyboardType: TextInputType.phone,
                   obscureText: true,
                   decoration: InputDecoration(
@@ -120,6 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                 5.heightBox,
                 TextFormField(
+                  controller: passwordIn,
                   obscureText: !isShowPassword,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(
@@ -147,9 +157,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 //* Login button
                 40.heightBox,
                 PrimaryButton(
-                  onPressed: () {
-                    Routes.instance
-                        .push(widget: const HomeScreen(), context: context);
+                  onPressed: () async {
+                    bool isValidated = signupValidation(emailIn.text,
+                        passwordIn.text, nameIn.text, phoneIn.text);
+                    if (isValidated) {
+                      bool isSignUp = await FirebaseAuthHelper.instance
+                          .signup(emailIn.text, passwordIn.text, context);
+                      if (isSignUp) {
+                        Routes.instance.pushAndRemoveUntil(
+                            widget: const HomeScreen(), context: context);
+                      }
+                    }
                   },
                   title: signup,
                 ),

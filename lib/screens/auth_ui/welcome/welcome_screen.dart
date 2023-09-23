@@ -92,12 +92,13 @@ class WelcomeScreen extends StatelessWidget {
                   Icon(
                     Icons.verified,
                     color: redColor.withOpacity(.2),
-                    size: 16,
+                    size: 13,
                   ),
                   5.widthBox,
                   credits.text
                       .color(redColor.withOpacity(.2))
                       .fontFamily(bold)
+                      .size(13)
                       .make(),
                 ],
               ),

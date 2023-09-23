@@ -21,6 +21,12 @@ const alreadyHaveAcc = "Already have an account? ";
 const buyYourfav = "Buy Your Favourites";
 const welcomeBack = "Welcome Back";
 const createNewAcc = "Create An Account";
+const loading = "Loading...";
+const emptyMail = "Email is empty";
+const emptyPass = "Password is empty";
+const emptyName = "Name is empty";
+const emptyPhone = "Phone number is empty";
+const enterDetails = "Enter details";
 
 //* Home strings
 const home = "Home",
@@ -34,6 +40,7 @@ const searchAnything = "Search anything...",
     todayDeal = "Today's Deal",
     flashSale = "Flash Sale",
     topSellers = "Top Sellers",
+    bestProduct = "Best Products",
     brand = "Brand",
     topCategories = "Top Categories",
     featuredCategories = "Featured Categories",

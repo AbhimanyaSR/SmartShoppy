@@ -23,6 +23,7 @@ ThemeData themeData = ThemeData(
   ),
 );
 
-OutlineInputBorder outlineInputBorder = const OutlineInputBorder(
+OutlineInputBorder outlineInputBorder =  OutlineInputBorder(
   borderSide: BorderSide(color: redColor),
+  borderRadius: BorderRadius.circular(12),
 );
