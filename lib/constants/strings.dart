@@ -31,15 +31,19 @@ const enterDetails = "Enter details";
 //* Home strings
 const home = "Home",
     categories = "Categories",
+    myCart = "My Cart",
     cart = "Cart",
-    account = "Account";
-
-//* Home screen strings
-
-const searchAnything = "Search anything...",
+    account = "Account",
+    searchAnything = "Search anything...",
     addtoCart = "Add to cart",
     addToCart = "ADD TO CART",
     buynow = "BUY NOW",
+    addtoWishlist = "Add to Wishlist",
+    addedtoCart = "Added to Cart",
+    itemAddedtoCart = "Item Added to Cart",
+    removedfromCart = "Removed from Cart",
+    itemRemovedfromCart = "Item Removed from Cart",
+    yourCartisEmpty = "Your Cart is Empty",
     todayDeal = "Today's Deal",
     flashSale = "Flash Sale",
     topSellers = "Top Sellers",

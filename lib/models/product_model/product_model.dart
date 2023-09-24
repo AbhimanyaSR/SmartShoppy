@@ -24,6 +24,8 @@ class ProductModel {
   String status;
   bool isFavorite;
 
+  double? qty;
+
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
 

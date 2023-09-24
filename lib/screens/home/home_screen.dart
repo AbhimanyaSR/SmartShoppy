@@ -4,6 +4,7 @@ import 'package:smart_shopy/constants/routes.dart';
 import 'package:smart_shopy/firebase/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:smart_shopy/models/category_model/category_model.dart';
 import 'package:smart_shopy/models/product_model/product_model.dart';
+import 'package:smart_shopy/screens/category_view/category_view.dart';
 import 'package:smart_shopy/screens/product_details/product_details.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -52,7 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 100,
                 width: 100,
                 alignment: Alignment.center,
-                child: const CircularProgressIndicator(),
+                child: const CircularProgressIndicator(
+                  color: redColor,
+                ),
               ),
             )
           : SafeArea(
@@ -132,6 +135,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         width: 100,
                                         child: Image.network(e.image),
                                       ),
+                                    ).onTap(
+                                      () {
+                                        Routes.instance.push(
+                                          widget:
+                                              CategoryView(categoryModel: e),
+                                          context: context,
+                                        );
+                                      },
                                     ),
                                   )
                                   .toList(),

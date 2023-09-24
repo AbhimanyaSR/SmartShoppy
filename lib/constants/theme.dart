@@ -19,7 +19,7 @@ ThemeData themeData = ThemeData(
     //* Outlined button style
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        backgroundColor: lighterGold,
+        backgroundColor: whiteColor,
         foregroundColor: redColor,
         textStyle: const TextStyle(color: redColor),
         side: const BorderSide(
@@ -32,7 +32,9 @@ ThemeData themeData = ThemeData(
     //* Elevated button style
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: redColor, disabledBackgroundColor: lightGrey),
+        backgroundColor: redColor,
+        disabledBackgroundColor: lightGrey,
+      ),
     ),
 
     //* App bar theme

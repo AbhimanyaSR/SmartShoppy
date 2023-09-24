@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_shopy/constants/constants.dart';
 import 'package:smart_shopy/constants/consts.dart';
+import 'package:smart_shopy/constants/routes.dart';
 import 'package:smart_shopy/models/product_model/product_model.dart';
+import 'package:smart_shopy/provider/app_provider.dart';
+import 'package:smart_shopy/screens/cart_screen/cart_screen.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel singleProduct;
@@ -19,8 +24,13 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              Routes.instance
+                  .push(widget: const CartScreen(), context: context);
+            },
+            icon: const Icon(
+              Icons.shopping_cart,
+            ),
           ),
         ],
       ),
@@ -78,13 +88,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                   backgroundColor: redColor,
                   child: const Icon(
                     Icons.remove,
-                    size: 30,
                   ).onTap(
                     () {
                       if (qty > 0) {
-                        setState(() {
-                          qty--;
-                        });
+                        setState(
+                          () {
+                            qty--;
+                          },
+                        );
                       }
                     },
                   ),
@@ -99,7 +110,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                   backgroundColor: redColor,
                   child: const Icon(
                     Icons.add,
-                    size: 30,
                   ).onTap(
                     () {
                       setState(
@@ -112,21 +122,34 @@ class _ProductDetailsState extends State<ProductDetails> {
                 )
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //* Add to cart button
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppProvider appProvider =
+                        Provider.of<AppProvider>(context, listen: false);
+                    appProvider.addCartProduct(widget.singleProduct);
+                    showMessage(
+                      itemAddedtoCart,
+                    );
+                  },
                   child: addToCart.text.size(15).make(),
                 ),
+
+                //* buy now button
                 25.widthBox,
                 SizedBox(
                   height: 37,
                   width: 130,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                    ),
                     onPressed: () {},
-                    child: buynow.text.size(15).make(),
+                    child: buynow.text.color(whiteColor).size(15).make(),
                   ),
                 )
               ],
