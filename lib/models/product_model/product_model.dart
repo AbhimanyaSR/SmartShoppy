@@ -24,7 +24,10 @@ class ProductModel {
   String status;
   bool isFavorite;
 
+
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+
+    
         image: json["image"],
         id: json["id"],
         name: json["name"],
