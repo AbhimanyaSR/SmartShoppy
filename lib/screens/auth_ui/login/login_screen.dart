@@ -4,7 +4,7 @@ import 'package:smart_shopy/constants/consts.dart';
 import 'package:smart_shopy/constants/routes.dart';
 import 'package:smart_shopy/firebase/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:smart_shopy/screens/auth_ui/signup/signup_screen.dart';
-import 'package:smart_shopy/screens/home/home_screen.dart';
+import 'package:smart_shopy/widgets/bottom_bar/custom_bottom_bar.dart';
 import 'package:smart_shopy/widgets/primary_button/primary_button.dart';
 import 'package:smart_shopy/widgets/top_title/top_title.dart';
 
@@ -106,13 +106,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 40.heightBox,
                 PrimaryButton(
                   onPressed: () async {
-                    bool isValidated = loginValidation(emailIn.text, passwordIn.text);
+                    bool isValidated =
+                        loginValidation(emailIn.text, passwordIn.text);
                     if (isValidated) {
                       bool isLogined = await FirebaseAuthHelper.instance
-                          .login(email, password, context);
+                          .login(emailIn.text, passwordIn.text, context);
                       if (isLogined) {
                         Routes.instance.pushAndRemoveUntil(
-                            widget: const HomeScreen(), context: context);
+                          widget: const CustomBottomBar(),
+                          context: context,
+                        );
                       }
                     }
                   },

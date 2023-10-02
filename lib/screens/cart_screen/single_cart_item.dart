@@ -17,9 +17,21 @@ class SingleCartItem extends StatefulWidget {
 }
 
 class _SingleCartItemState extends State<SingleCartItem> {
-  int qty = 0;
+  int qty = 1;
+
+  @override
+  void initState() {
+    qty = widget.singleProduct.qty ?? 1;
+    setState(
+      () {},
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
@@ -43,7 +55,7 @@ class _SingleCartItemState extends State<SingleCartItem> {
           Expanded(
             flex: 2,
             child: SizedBox(
-              height: 140,
+              height: 150,
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 10,
@@ -114,14 +126,36 @@ class _SingleCartItemState extends State<SingleCartItem> {
                           ],
                         ),
                         15.heightBox,
-                        addtoWishlist.text
-                            .size(15)
-                            .color(redColor)
-                            .fontFamily(semibold)
-                            .make()
-                            .onTap(
-                              () {},
+                        MaterialButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            if (!appProvider.getFavoriteProductList.contains(
+                              widget.singleProduct,
+                            )) {
+                              appProvider
+                                  .addfavoriteProduct(widget.singleProduct);
+                              showMessage(itemAddedtoWishlist);
+                            } else {
+                              setState(
+                                () {
+                                  appProvider.removeFavoriteProduct(
+                                      widget.singleProduct);
+                                  showMessage(itemRemovedfromWishlist);
+                                },
+                              );
+                            }
+                          },
+                          child: Text(
+                            appProvider.getFavoriteProductList
+                                    .contains(widget.singleProduct)
+                                ? removefromWishlist
+                                : addtoWishlist,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontFamily: semibold,
                             ),
+                          ),
+                        ),
                       ],
                     ),
                     //* Price

@@ -3,7 +3,7 @@ import 'package:smart_shopy/constants/constants.dart';
 import 'package:smart_shopy/constants/consts.dart';
 import 'package:smart_shopy/constants/routes.dart';
 import 'package:smart_shopy/firebase/firebase_auth_helper/firebase_auth_helper.dart';
-import 'package:smart_shopy/screens/home/home_screen.dart';
+import 'package:smart_shopy/widgets/bottom_bar/custom_bottom_bar.dart';
 import 'package:smart_shopy/widgets/primary_button/primary_button.dart';
 import 'package:smart_shopy/widgets/top_title/top_title.dart';
 
@@ -105,12 +105,11 @@ class _SignupScreenState extends State<SignupScreen> {
                 TextFormField(
                   controller: phoneIn,
                   keyboardType: TextInputType.phone,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(
                       Icons.phone_android_outlined,
                     ),
-                    hintText: passwordHint,
+                    hintText: phoneHint,
                   ),
                 ),
                 //* Password input field
@@ -161,11 +160,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     bool isValidated = signupValidation(emailIn.text,
                         passwordIn.text, nameIn.text, phoneIn.text);
                     if (isValidated) {
-                      bool isSignUp = await FirebaseAuthHelper.instance
-                          .signup(emailIn.text, passwordIn.text, context);
+                      bool isSignUp = await FirebaseAuthHelper.instance.signup(
+                        nameIn.text,
+                        emailIn.text,
+                        passwordIn.text,
+                        context,
+                      );
                       if (isSignUp) {
                         Routes.instance.pushAndRemoveUntil(
-                            widget: const HomeScreen(), context: context);
+                          widget: const CustomBottomBar(),
+                          context: context,
+                        );
                       }
                     }
                   },

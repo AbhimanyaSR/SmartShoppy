@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_shopy/constants/consts.dart';
 import 'package:smart_shopy/constants/routes.dart';
 import 'package:smart_shopy/firebase/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:smart_shopy/models/category_model/category_model.dart';
 import 'package:smart_shopy/models/product_model/product_model.dart';
+import 'package:smart_shopy/provider/app_provider.dart';
 import 'package:smart_shopy/screens/category_view/category_view.dart';
 import 'package:smart_shopy/screens/product_details/product_details.dart';
 
@@ -21,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    appProvider.getUserInfoFirebase;
     getCategoryList();
     super.initState();
   }
@@ -29,12 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       isLoading = true;
     });
-    categoriesList = await FirebaseFirestorehelper.instance.getCategories();
-    productModelList = await FirebaseFirestorehelper.instance.getBestProducts();
+    categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
+    productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
     productModelList.shuffle();
-    setState(() {
       isLoading = false;
-    });
   }
 
   @override
@@ -42,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       //* App bar
       appBar: AppBar(
-        title: Text(
+        title:const  Text(
           appname,
           style: TextStyle(fontSize: 23),
         ),
@@ -64,19 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     20.heightBox,
-                    //* App title
-                    // const TopTitle(
-                    //   title: appname,
-                    //   subTitle: '',
-                    // )
-                    //     .box
-                    //     .padding(
-                    //       const EdgeInsets.only(
-                    //         left: 12,
-                    //         top: 5,
-                    //       ),
-                    //     )
-                    //     .make(),
 
                     //* Search field
                     TextFormField(
@@ -172,6 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         : Padding(
                             padding: const EdgeInsets.all(5),
                             child: GridView.builder(
+                              padding: EdgeInsets.only(bottom: 50),
                               itemCount: productModelList.length,
                               shrinkWrap: true,
                               gridDelegate:
@@ -193,15 +183,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       12.heightBox,
                                       //? Image
-
-                                      // SizedBox(
-                                      //   height: 80,
-                                      //   width: 100,
-                                      //   child: Image.network(
-                                      //     singleProduct.image,
-                                      //     fit: BoxFit.fill,
-                                      //   ),
-                                      // ),
                                       Image.network(
                                         singleProduct.image,
                                         fit: BoxFit.fill,

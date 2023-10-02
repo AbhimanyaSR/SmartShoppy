@@ -24,7 +24,7 @@ class _CategoryViewState extends State<CategoryView> {
         isLoading = true;
       },
     );
-    productModelList = await FirebaseFirestorehelper.instance
+    productModelList = await FirebaseFirestoreHelper.instance
         .getCategoryViewProduct(widget.categoryModel.id);
     productModelList.shuffle();
     setState(

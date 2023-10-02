@@ -6,7 +6,7 @@ import 'package:smart_shopy/firebase/firebase_options/firebase_options.dart';
 import 'package:smart_shopy/provider/app_provider.dart';
 import 'package:smart_shopy/screens/auth_ui/welcome/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:smart_shopy/screens/home/home_screen.dart';
+import 'package:smart_shopy/widgets/bottom_bar/custom_bottom_bar.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuthHelper.instance.getAuthChange,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const HomeScreen();
+              return const CustomBottomBar();
             }
             return const WelcomeScreen();
           },

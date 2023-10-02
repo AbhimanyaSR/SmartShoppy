@@ -86,22 +86,22 @@ class WelcomeScreen extends StatelessWidget {
               const Expanded(child: SizedBox()),
 
               //* Credit text
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.verified,
-                    color: redColor.withOpacity(.2),
-                    size: 13,
-                  ),
-                  5.widthBox,
-                  credits.text
-                      .color(redColor.withOpacity(.2))
-                      .fontFamily(bold)
-                      .size(13)
-                      .make(),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Icon(
+              //       Icons.verified,
+              //       color: redColor.withOpacity(.2),
+              //       size: 13,
+              //     ),
+              //     5.widthBox,
+              //     credits.text
+              //         .color(redColor.withOpacity(.2))
+              //         .fontFamily(bold)
+              //         .size(13)
+              //         .make(),
+              //   ],
+              // ),
             ],
           ),
         ),

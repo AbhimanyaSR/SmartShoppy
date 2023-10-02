@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_shopy/constants/constants.dart';
+import 'package:smart_shopy/models/user_model/user_model.dart';
 
 class FirebaseAuthHelper {
   static FirebaseAuthHelper instance = FirebaseAuthHelper();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Stream<User?> get getAuthChange => _auth.authStateChanges();
 
   //! For Log in
@@ -24,11 +27,25 @@ class FirebaseAuthHelper {
 
   //! For Sign up
   Future<bool> signup(
-      String email, String password, BuildContext context) async {
+    String name,
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
     try {
       showLoaderDialog(context);
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      UserModel userModel = UserModel(
+        id: userCredential.user!.uid,
+        name: name,
+        email: email,
+      );
+
+      // _firestore.collection("users").doc(userModel.id).set(userModel.toJson());
+      _firestore.collection("users").doc(userModel.id).set(userModel.toJson());
+
       Navigator.of(context).pop();
       return true;
     } on FirebaseAuthException catch (error) {
@@ -36,5 +53,10 @@ class FirebaseAuthHelper {
       Navigator.of(context).pop();
       return false;
     }
+  }
+
+  //! For Log out
+  signOut() async {
+    await _auth.signOut();
   }
 }

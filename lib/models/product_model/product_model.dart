@@ -7,45 +7,60 @@ String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
   ProductModel({
-    required this.image,
     required this.id,
+    required this.image,
     required this.name,
     required this.price,
     required this.description,
     required this.status,
     required this.isFavorite,
+    this.qty,
   });
 
-  String image;
   String id;
+  String image;
   String name;
   String price;
   String description;
   String status;
   bool isFavorite;
 
-  double? qty;
-
+  int? qty;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-
-    
-        image: json["image"],
         id: json["id"],
+        image: json["image"],
         name: json["name"],
         price: json["price"],
         description: json["description"],
         status: json["status"],
         isFavorite: false,
+        qty: json["qty"],
       );
 
   Map<String, dynamic> toJson() => {
-        "image": image,
         "id": id,
+        "image": image,
         "name": name,
         "price": price,
         "description": description,
         "status": status,
         "isFavorite": isFavorite,
+        "qty": qty,
       };
+
+  // @override
+  ProductModel copyWith({
+    int? qty,
+  }) =>
+      ProductModel(
+        id: id,
+        image: image,
+        name: name,
+        price: price,
+        description: description,
+        status: status,
+        isFavorite: isFavorite,
+        qty: qty ?? this.qty,
+      );
 }

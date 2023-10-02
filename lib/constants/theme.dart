@@ -38,7 +38,7 @@ ThemeData themeData = ThemeData(
     ),
 
     //* App bar theme
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: redColor,
       elevation: 0,
       iconTheme: IconThemeData(color: whiteColor),
